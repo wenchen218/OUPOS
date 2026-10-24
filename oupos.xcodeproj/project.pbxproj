@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		493020FA6B1F3CC987246756 /* NetworkPrinterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BBF27FAEC0FD8BB135460A /* NetworkPrinterService.swift */; };
+		6F669710570651EA5F93881D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2191B81310633EB3DA7A68D6 /* Assets.xcassets */; };
+		79EFFB79E190869131EEF224 /* ouposTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9361E88328CDCAB51C0E5A65 /* ouposTests.swift */; };
+		8707AD722B5193CCFD1E9B27 /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF4FDCB968D7679ABF1C75 /* CommonViews.swift */; };
+		92BBF341FADCD8B462811B16 /* POSStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99E0861EDEE9089602568B /* POSStore.swift */; };
+		A112CFCD2C748B715A507DD4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624737A56801C8B8C8C37E00 /* SettingsView.swift */; };
+		A1AA00000000000000000001 /* AIMenuImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA00000000000000000003 /* AIMenuImport.swift */; };
+		A1AA00000000000000000002 /* AIMenuImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA00000000000000000004 /* AIMenuImportView.swift */; };
+		A6494EC62FAE1018AF20C087 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F585AAC528BCCC48FF708E0 /* OrderView.swift */; };
+		ABCDEF000000000000000001 /* LocalPOSDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000003 /* LocalPOSDatabase.swift */; };
+		ABCDEF000000000000000002 /* ReceiptFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000004 /* ReceiptFormatter.swift */; };
+		ABCDEF000000000000000005 /* LocalBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000006 /* LocalBackupView.swift */; };
+		AFFE00000000000000000001 /* LocalMerchantStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE00000000000000000002 /* LocalMerchantStore.swift */; };
+		AFFE00000000000000000003 /* LocalMerchantSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE00000000000000000004 /* LocalMerchantSetupView.swift */; };
+		B568FAD93B7341499D038015 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B262E262044E0B3041EAD9 /* DesignSystem.swift */; };
+		BB1244891463D883EB9E817D /* POSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246F0208C09FED59AE0E4023 /* POSModels.swift */; };
+		D92DF2E232BF79F81C2174B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9472D09CA812F791EAC5BDC /* LaunchScreen.storyboard */; };
+		DDDD00000000000000000001 /* LocalAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD00000000000000000003 /* LocalAccountService.swift */; };
+		DDDD00000000000000000002 /* StaffAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD00000000000000000004 /* StaffAccountsView.swift */; };
+		E581CA2051BCDD349EAADA5F /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFE37387EF99E97DB2CB73F /* CheckoutView.swift */; };
+		E5B558C4A60CC206AD259411 /* ouposApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF2000E5D5DCBFD22A0303 /* ouposApp.swift */; };
+		E6BAE0AD0678D16B1F8C4B7C /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DEB425B3503837E6929EB /* ReportsView.swift */; };
+		EAAA00000000000000000003 /* AdministratorRecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA00000000000000000004 /* AdministratorRecoveryView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A184E1831CD1831F05D9B3C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6362BB5B63E4697176365A09 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A97FBCC7283FF282C25861D2;
+			remoteInfo = oupos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B99E0861EDEE9089602568B /* POSStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSStore.swift; sourceTree = "<group>"; };
+		12B262E262044E0B3041EAD9 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		2191B81310633EB3DA7A68D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		246F0208C09FED59AE0E4023 /* POSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POSModels.swift; sourceTree = "<group>"; };
+		3F585AAC528BCCC48FF708E0 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		54BBF27FAEC0FD8BB135460A /* NetworkPrinterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPrinterService.swift; sourceTree = "<group>"; };
+		624737A56801C8B8C8C37E00 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9361E88328CDCAB51C0E5A65 /* ouposTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ouposTests.swift; sourceTree = "<group>"; };
+		A1AA00000000000000000003 /* AIMenuImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMenuImport.swift; sourceTree = "<group>"; };
+		A1AA00000000000000000004 /* AIMenuImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMenuImportView.swift; sourceTree = "<group>"; };
+		ABCDEF000000000000000003 /* LocalPOSDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPOSDatabase.swift; sourceTree = "<group>"; };
+		ABCDEF000000000000000004 /* ReceiptFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFormatter.swift; sourceTree = "<group>"; };
+		ABCDEF000000000000000006 /* LocalBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBackupView.swift; sourceTree = "<group>"; };
+		ADFE37387EF99E97DB2CB73F /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		AEDF2000E5D5DCBFD22A0303 /* ouposApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ouposApp.swift; sourceTree = "<group>"; };
+		AFFE00000000000000000002 /* LocalMerchantStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMerchantStore.swift; sourceTree = "<group>"; };
+		AFFE00000000000000000004 /* LocalMerchantSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMerchantSetupView.swift; sourceTree = "<group>"; };
+		C9E6EF00636BF1275B733EDB /* ouposTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ouposTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9472D09CA812F791EAC5BDC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDDD00000000000000000003 /* LocalAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAccountService.swift; sourceTree = "<group>"; };
+		DDDD00000000000000000004 /* StaffAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffAccountsView.swift; sourceTree = "<group>"; };
+		DF3DEB425B3503837E6929EB /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
+		EAAA00000000000000000004 /* AdministratorRecoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdministratorRecoveryView.swift; sourceTree = "<group>"; };
+		EC0CCF26FB3284A028307F3A /* oupos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oupos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECCF4FDCB968D7679ABF1C75 /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AFFE00000000000000000008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B6E0281A74EEE9B1276ADDF /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				DF3DEB425B3503837E6929EB /* ReportsView.swift */,
+			);
+			path = Reports;
+			sourceTree = "<group>";
+		};
+		159D8C1B2D6B9FED49DCC167 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AEDF2000E5D5DCBFD22A0303 /* ouposApp.swift */,
+				0B99E0861EDEE9089602568B /* POSStore.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1BFFCD4F286F0B15F794251E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				ECCF4FDCB968D7679ABF1C75 /* CommonViews.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		5280B2BF651CF460E85F04D4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DDDD00000000000000000004 /* StaffAccountsView.swift */,
+				EAAA00000000000000000004 /* AdministratorRecoveryView.swift */,
+				624737A56801C8B8C8C37E00 /* SettingsView.swift */,
+				A1AA00000000000000000004 /* AIMenuImportView.swift */,
+				ABCDEF000000000000000006 /* LocalBackupView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		576182BCC7A4BDA3CBE9AAB9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DDDD00000000000000000003 /* LocalAccountService.swift */,
+				AFFE00000000000000000002 /* LocalMerchantStore.swift */,
+				54BBF27FAEC0FD8BB135460A /* NetworkPrinterService.swift */,
+				ABCDEF000000000000000003 /* LocalPOSDatabase.swift */,
+				A1AA00000000000000000003 /* AIMenuImport.swift */,
+				ABCDEF000000000000000004 /* ReceiptFormatter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6764483FADFA6E1E05642882 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D9472D09CA812F791EAC5BDC /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7C098ACAB1702B7AD6B567DD /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				12B262E262044E0B3041EAD9 /* DesignSystem.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		7F1EEE1B32A0BA7FEE129A92 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE37387EF99E97DB2CB73F /* CheckoutView.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
+		81F9485A288BDF96AA25A084 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				3F585AAC528BCCC48FF708E0 /* OrderView.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		8D79796A0D29F430B05CB3F7 /* oupos */ = {
+			isa = PBXGroup;
+			children = (
+				2191B81310633EB3DA7A68D6 /* Assets.xcassets */,
+				159D8C1B2D6B9FED49DCC167 /* App */,
+				7C098ACAB1702B7AD6B567DD /* DesignSystem */,
+				BE8B2ABCA234A73B3A28B6BD /* Features */,
+				F90155B8889F1AD71366D2A5 /* Models */,
+				6764483FADFA6E1E05642882 /* Resources */,
+				576182BCC7A4BDA3CBE9AAB9 /* Services */,
+				1BFFCD4F286F0B15F794251E /* Shared */,
+			);
+			path = oupos;
+			sourceTree = "<group>";
+		};
+		99E461560C236516DC75B4EE /* ouposTests */ = {
+			isa = PBXGroup;
+			children = (
+				9361E88328CDCAB51C0E5A65 /* ouposTests.swift */,
+			);
+			path = ouposTests;
+			sourceTree = "<group>";
+		};
+		AFFE00000000000000000007 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AFFE00000000000000000004 /* LocalMerchantSetupView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		BE8B2ABCA234A73B3A28B6BD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				7F1EEE1B32A0BA7FEE129A92 /* Checkout */,
+				AFFE00000000000000000007 /* Onboarding */,
+				81F9485A288BDF96AA25A084 /* Order */,
+				0B6E0281A74EEE9B1276ADDF /* Reports */,
+				5280B2BF651CF460E85F04D4 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		F43A7437A4DFA1D70106610D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC0CCF26FB3284A028307F3A /* oupos.app */,
+				C9E6EF00636BF1275B733EDB /* ouposTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F51E211F55E81B71D1D0D958 = {
+			isa = PBXGroup;
+			children = (
+				8D79796A0D29F430B05CB3F7 /* oupos */,
+				99E461560C236516DC75B4EE /* ouposTests */,
+				F43A7437A4DFA1D70106610D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F90155B8889F1AD71366D2A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				246F0208C09FED59AE0E4023 /* POSModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		929011B9E2D35200A7524763 /* ouposTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6D4C1A1E21F5225C71B4CD3 /* Build configuration list for PBXNativeTarget "ouposTests" */;
+			buildPhases = (
+				232C5208333D97254856B635 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95B6DF85B8CCC33D358DDA43 /* PBXTargetDependency */,
+			);
+			name = ouposTests;
+			packageProductDependencies = (
+			);
+			productName = ouposTests;
+			productReference = C9E6EF00636BF1275B733EDB /* ouposTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A97FBCC7283FF282C25861D2 /* oupos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B60F330A5EF15530CFBE5B3C /* Build configuration list for PBXNativeTarget "oupos" */;
+			buildPhases = (
+				3C4EA14F4C064DD5FDFB29EB /* Sources */,
+				AFFE00000000000000000008 /* Frameworks */,
+				12FDD79B54B0787520F71A48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = oupos;
+			packageProductDependencies = (
+			);
+			productName = oupos;
+			productReference = EC0CCF26FB3284A028307F3A /* oupos.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6362BB5B63E4697176365A09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 49F4F31331EBE26837707E6C /* Build configuration list for PBXProject "oupos" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F51E211F55E81B71D1D0D958;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F43A7437A4DFA1D70106610D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A97FBCC7283FF282C25861D2 /* oupos */,
+				929011B9E2D35200A7524763 /* ouposTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		12FDD79B54B0787520F71A48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F669710570651EA5F93881D /* Assets.xcassets in Resources */,
+				D92DF2E232BF79F81C2174B4 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		232C5208333D97254856B635 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79EFFB79E190869131EEF224 /* ouposTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C4EA14F4C064DD5FDFB29EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDDD00000000000000000001 /* LocalAccountService.swift in Sources */,
+				AFFE00000000000000000001 /* LocalMerchantStore.swift in Sources */,
+				AFFE00000000000000000003 /* LocalMerchantSetupView.swift in Sources */,
+				EAAA00000000000000000003 /* AdministratorRecoveryView.swift in Sources */,
+				DDDD00000000000000000002 /* StaffAccountsView.swift in Sources */,
+				E581CA2051BCDD349EAADA5F /* CheckoutView.swift in Sources */,
+				8707AD722B5193CCFD1E9B27 /* CommonViews.swift in Sources */,
+				B568FAD93B7341499D038015 /* DesignSystem.swift in Sources */,
+				493020FA6B1F3CC987246756 /* NetworkPrinterService.swift in Sources */,
+				ABCDEF000000000000000001 /* LocalPOSDatabase.swift in Sources */,
+				ABCDEF000000000000000002 /* ReceiptFormatter.swift in Sources */,
+				A6494EC62FAE1018AF20C087 /* OrderView.swift in Sources */,
+				BB1244891463D883EB9E817D /* POSModels.swift in Sources */,
+				92BBF341FADCD8B462811B16 /* POSStore.swift in Sources */,
+				E6BAE0AD0678D16B1F8C4B7C /* ReportsView.swift in Sources */,
+				A112CFCD2C748B715A507DD4 /* SettingsView.swift in Sources */,
+				A1AA00000000000000000001 /* AIMenuImport.swift in Sources */,
+				A1AA00000000000000000002 /* AIMenuImportView.swift in Sources */,
+				ABCDEF000000000000000005 /* LocalBackupView.swift in Sources */,
+				E5B558C4A60CC206AD259411 /* ouposApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		95B6DF85B8CCC33D358DDA43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A97FBCC7283FF282C25861D2 /* oupos */;
+			targetProxy = A184E1831CD1831F05D9B3C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1267C81DFA09C93D624B4AE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.ouposTests;
+				PRODUCT_MODULE_NAME = ouposTests;
+				PRODUCT_NAME = ouposTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/oupos.app/oupos";
+			};
+			name = Release;
+		};
+		481225605CD6E315F51DB734 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4XV38UL8D;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = oupos/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = oupos;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "OUPOS 只會在忘記管理員密碼時使用 Face ID 驗證身分，驗證後可設定新密碼。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "oupos 需要連線到店內出單機列印訂單。";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIViewControllerBasedStatusBarAppearance = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.oupos;
+				PRODUCT_NAME = oupos;
+				SDKROOT = iphoneos;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		4F0FEF968A586BCC51037219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4XV38UL8D;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = oupos/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = oupos;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "OUPOS 只會在忘記管理員密碼時使用 Face ID 驗證身分，驗證後可設定新密碼。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "oupos 需要連線到店內出單機列印訂單。";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIViewControllerBasedStatusBarAppearance = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.oupos;
+				PRODUCT_NAME = oupos;
+				SDKROOT = iphoneos;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		6FECA98F8801D4262E4555EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		CECFC11BBE149ED617A3FF01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.ouposTests;
+				PRODUCT_MODULE_NAME = ouposTests;
+				PRODUCT_NAME = ouposTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/oupos.app/oupos";
+			};
+			name = Debug;
+		};
+		D0FD20CBC9CFE9119634C76E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49F4F31331EBE26837707E6C /* Build configuration list for PBXProject "oupos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FECA98F8801D4262E4555EC /* Debug */,
+				D0FD20CBC9CFE9119634C76E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B60F330A5EF15530CFBE5B3C /* Build configuration list for PBXNativeTarget "oupos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481225605CD6E315F51DB734 /* Debug */,
+				4F0FEF968A586BCC51037219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B6D4C1A1E21F5225C71B4CD3 /* Build configuration list for PBXNativeTarget "ouposTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECFC11BBE149ED617A3FF01 /* Debug */,
+				1267C81DFA09C93D624B4AE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6362BB5B63E4697176365A09 /* Project object */;
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    "吐司",
+    "飲品"
+  ],
+  "products": [
+    {
+      "category": "吐司",
+      "name": "果醬吐司",
+      "price": 35
+    },
+    {
+      "category": "吐司",
+      "name": "蛋吐司",
+      "price": 40
+    },
+    {
+      "category": "飲品",
+      "name": "紅茶",
+      "price": 25
+    }
+  ],
+  "toppingGroups": [
+    {
+      "name": "果醬",
+      "maxSelect": 3
+    },
+    {
+      "name": "加蛋",
+      "maxSelect": 0
+    },
+    {
+      "name": "溫度",
+      "maxSelect": 1
+    }
+  ],
+  "toppings": [
+    {
+      "group": "果醬",
+      "name": "草莓",
+      "price": 0,
+      "selectionType": "checkbox",
+      "isRequired": false,
+      "appliesToCategories": [],
+      "appliesToProducts": [
+        {
+          "category": "吐司",
+          "name": "果醬吐司"
+        }
+      ]
+    },
+    {
+      "group": "果醬",
+      "name": "花生",
+      "price": 0,
+      "selectionType": "checkbox",
+      "isRequired": false,
+      "appliesToCategories": [],
+      "appliesToProducts": [
+        {
+          "category": "吐司",
+          "name": "果醬吐司"
+        }
+      ]
+    },
+    {
+      "group": "果醬",
+      "name": "巧克力",
+      "price": 0,
+      "selectionType": "checkbox",
+      "isRequired": false,
+      "appliesToCategories": [],
+      "appliesToProducts": [
+        {
+          "category": "吐司",
+          "name": "果醬吐司"
+        }
+      ]
+    },
+    {
+      "group": "加蛋",
+      "name": "加蛋",
+      "price": 15,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [],
+      "appliesToProducts": [
+        {
+          "category": "吐司",
+          "name": "蛋吐司"
+        }
+      ]
+    },
+    {
+      "group": "溫度",
+      "name": "去冰",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "溫度",
+      "name": "微冰",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "溫度",
+      "name": "熱",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    }
+  ]
+}

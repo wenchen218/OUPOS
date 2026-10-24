@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    "吐司",
+    "漢堡",
+    "蛋餅",
+    "鐵板麵",
+    "飲品"
+  ],
+  "products": [
+    {
+      "category": "吐司",
+      "name": "火腿蛋吐司",
+      "price": 50
+    },
+    {
+      "category": "吐司",
+      "name": "起司蛋吐司",
+      "price": 45
+    },
+    {
+      "category": "吐司",
+      "name": "鮪魚蛋吐司",
+      "price": 55
+    },
+    {
+      "category": "吐司",
+      "name": "豬排蛋吐司",
+      "price": 65
+    },
+    {
+      "category": "漢堡",
+      "name": "香雞蛋堡",
+      "price": 60
+    },
+    {
+      "category": "漢堡",
+      "name": "牛肉蛋堡",
+      "price": 70
+    },
+    {
+      "category": "漢堡",
+      "name": "卡啦雞腿堡",
+      "price": 75
+    },
+    {
+      "category": "蛋餅",
+      "name": "原味蛋餅",
+      "price": 30
+    },
+    {
+      "category": "蛋餅",
+      "name": "玉米蛋餅",
+      "price": 40
+    },
+    {
+      "category": "蛋餅",
+      "name": "起司蛋餅",
+      "price": 40
+    },
+    {
+      "category": "蛋餅",
+      "name": "培根蛋餅",
+      "price": 45
+    },
+    {
+      "category": "蛋餅",
+      "name": "鮪魚蛋餅",
+      "price": 50
+    },
+    {
+      "category": "鐵板麵",
+      "name": "蘑菇鐵板麵",
+      "price": 55
+    },
+    {
+      "category": "鐵板麵",
+      "name": "黑胡椒鐵板麵",
+      "price": 55
+    },
+    {
+      "category": "鐵板麵",
+      "name": "宮保雞丁鐵板麵",
+      "price": 75
+    },
+    {
+      "category": "飲品",
+      "name": "紅茶",
+      "price": 20
+    },
+    {
+      "category": "飲品",
+      "name": "奶茶",
+      "price": 25
+    },
+    {
+      "category": "飲品",
+      "name": "豆漿",
+      "price": 20
+    },
+    {
+      "category": "飲品",
+      "name": "鮮奶茶",
+      "price": 40
+    },
+    {
+      "category": "飲品",
+      "name": "美式咖啡",
+      "price": 40
+    }
+  ],
+  "toppingGroups": [
+    {
+      "name": "加蛋",
+      "maxSelect": 0
+    },
+    {
+      "name": "吐司與漢堡加料",
+      "maxSelect": 0
+    },
+    {
+      "name": "蛋餅加料",
+      "maxSelect": 0
+    },
+    {
+      "name": "鐵板麵加料",
+      "maxSelect": 0
+    },
+    {
+      "name": "飲品調整",
+      "maxSelect": 0
+    }
+  ],
+  "toppings": [
+    {
+      "group": "加蛋",
+      "name": "加蛋",
+      "price": 15,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "吐司",
+        "漢堡",
+        "鐵板麵"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "吐司與漢堡加料",
+      "name": "加起司",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "吐司",
+        "漢堡"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "吐司與漢堡加料",
+      "name": "加火腿",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "吐司",
+        "漢堡"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "吐司與漢堡加料",
+      "name": "加培根",
+      "price": 15,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "吐司",
+        "漢堡"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "蛋餅加料",
+      "name": "加起司",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "蛋餅"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "蛋餅加料",
+      "name": "加玉米",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "蛋餅"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "蛋餅加料",
+      "name": "加鮪魚",
+      "price": 15,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "蛋餅"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "鐵板麵加料",
+      "name": "加麵",
+      "price": 15,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "鐵板麵"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "鐵板麵加料",
+      "name": "加起司",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "鐵板麵"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "飲品調整",
+      "name": "少冰",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "飲品調整",
+      "name": "去冰",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "飲品調整",
+      "name": "無糖",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "飲品調整",
+      "name": "半糖",
+      "price": 0,
+      "selectionType": "single",
+      "isRequired": false,
+      "appliesToCategories": [
+        "飲品"
+      ],
+      "appliesToProducts": []
+    }
+  ]
+}

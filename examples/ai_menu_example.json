@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    "茶飲",
+    "咖啡"
+  ],
+  "products": [
+    {
+      "category": "茶飲",
+      "name": "原味紅茶",
+      "price": 30
+    },
+    {
+      "category": "茶飲",
+      "name": "茉莉綠茶",
+      "price": 35
+    },
+    {
+      "category": "咖啡",
+      "name": "拿鐵",
+      "price": 65
+    }
+  ],
+  "toppingGroups": [
+    {
+      "name": "加料",
+      "maxSelect": 0
+    },
+    {
+      "name": "飲品加購",
+      "maxSelect": 0
+    }
+  ],
+  "toppings": [
+    {
+      "group": "加料",
+      "name": "珍珠",
+      "price": 10,
+      "selectionType": "multi",
+      "isRequired": false,
+      "appliesToCategories": [
+        "茶飲"
+      ],
+      "appliesToProducts": []
+    },
+    {
+      "group": "飲品加購",
+      "name": "燕麥奶",
+      "price": 15,
+      "selectionType": "checkbox",
+      "isRequired": false,
+      "appliesToCategories": [],
+      "appliesToProducts": [
+        {
+          "category": "咖啡",
+          "name": "拿鐵"
+        }
+      ]
+    }
+  ]
+}
