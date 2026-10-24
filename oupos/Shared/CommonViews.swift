@@ -1,4 +1,21 @@
 import SwiftUI
+import UIKit
+
+@MainActor
+enum KeyboardDismissal {
+    static func dismiss() {
+        // End editing in the active window BEFORE replacing a page, closing a
+        // sheet, or refreshing app state. Unlike toggling per-field FocusState,
+        // this does not select another field (and cannot reopen the keyboard).
+        for case let scene as UIWindowScene in UIApplication.shared.connectedScenes {
+            for window in scene.windows where window.isKeyWindow {
+                window.endEditing(true)
+            }
+        }
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil, from: nil, for: nil)
+    }
+}
 
 struct ToastData: Equatable { let message: String }
 
@@ -41,6 +58,9 @@ struct RootView: View {
         .alert("操作失敗", isPresented: Binding(get: { store.errorMessage != nil }, set: { if !$0 { store.errorMessage = nil } })) {
             Button("知道了", role: .cancel) { store.errorMessage = nil }
         } message: { Text(store.errorMessage ?? "本機操作失敗") }
+        .onChange(of: store.currentTab) { _, _ in KeyboardDismissal.dismiss() }
+        .onChange(of: store.isCheckoutPresented) { _, _ in KeyboardDismissal.dismiss() }
+        .onChange(of: store.isSignedIn) { _, _ in KeyboardDismissal.dismiss() }
         .statusBarHidden(true)
         .persistentSystemOverlays(.hidden)
     }
@@ -64,6 +84,7 @@ struct TopNavigationBar: View {
             HStack(spacing: 6) {
                 ForEach(store.availableTabs) { tab in
                     Button {
+                        KeyboardDismissal.dismiss()
                         store.isCheckoutPresented = false
                         store.currentTab = tab
                         if tab == .reports { store.refreshReport() }
@@ -91,7 +112,7 @@ struct TopNavigationBar: View {
             }
             .foregroundStyle(.white)
             .frame(width: 115, alignment: .trailing)
-            Button("登出") { store.signOut() }
+            Button("登出") { KeyboardDismissal.dismiss(); store.signOut() }
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(.white)
                 .buttonStyle(.bordered)

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 enum POSColor {
     static let background = Color(hex: 0xF2F2F4)
@@ -103,6 +104,11 @@ enum OUPOSAuthAppearance {
 }
 
 struct OUPOSAuthInputModifier: ViewModifier {
+    // Appearance only: input fields must never acquire a FocusState binding
+    // inside a reusable modifier. Independent bindings and per-field
+    // keyboardDidHide observers can fight over first responder on iPadOS,
+    // reopening the keyboard when the view hierarchy refreshes.
+    // Native TextField / SecureField handles focus ONLY when the user taps it.
     func body(content: Content) -> some View {
         content
             .font(.system(size: 16))

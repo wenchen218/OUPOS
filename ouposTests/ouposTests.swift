@@ -6,7 +6,14 @@ import UIKit
 final class ouposTests: XCTestCase {
     private final class MemoryAccountStorage: StaffAccountStorage {
         var vault = StaffAccountVault()
-        func load() throws -> StaffAccountVault { vault }
+        var failNextReads = 0
+        func load() throws -> StaffAccountVault {
+            if failNextReads > 0 {
+                failNextReads -= 1
+                throw AccountError.protectedDataUnavailable
+            }
+            return vault
+        }
         func save(_ value: StaffAccountVault) throws { vault = value }
     }
 
@@ -68,6 +75,30 @@ final class ouposTests: XCTestCase {
                 }
             }
             XCTAssertTrue(hasPrinting)
+        }
+    }
+
+    func testReceiptPrintsBusinessNameFirstOnReverseFeedPrinter() throws {
+        let order = POSOrder(id: UUID(), number: "2610249977", createdAt: Date(), table: "內用",
+            lines: [OrderLine(id: UUID(), name: "草莓吐司", quantity: 1, unitPrice: 110,
+                              modifiers: ["加蛋 ×5 +75"], note: nil)],
+            note: "不要袋子", paymentMethod: "LinePay", status: .completed)
+        let display = ReceiptFormatter.content(order: order, businessName: "早餐店")
+        XCTAssertEqual(display.items[0].modifiers, ["加蛋 ×5"])
+        XCTAssertEqual(order.lines[0].modifiers, ["加蛋 ×5 +75"]) // history unchanged
+        XCTAssertEqual(order.total, 110)
+        for width in [384, 576] {
+            let normal = try receiptBitmapRows(ReceiptFormatter.makeReceipt(
+                order: order, width: width, businessName: "早餐店",
+                correctHorizontalMirror: false, correctVerticalOrder: false))
+            let reversed = try receiptBitmapRows(ReceiptFormatter.makeReceipt(
+                order: order, width: width, businessName: "早餐店",
+                correctHorizontalMirror: false, correctVerticalOrder: true))
+            XCTAssertFalse(normal.isEmpty)
+            XCTAssertEqual(normal.count, reversed.count)
+            for index in normal.indices {
+                XCTAssertEqual(reversed[index], normal[normal.count - 1 - index])
+            }
         }
     }
 
@@ -342,6 +373,52 @@ final class ouposTests: XCTestCase {
         XCTAssertFalse(restarted.isSignedIn)
         XCTAssertTrue(restarted.accountGate.isLogin)
         XCTAssertNil(try service.restoreSession())
+    }
+
+    func testTemporaryKeychainLockDoesNotDestroySessionOrCart() throws {
+        let storage = MemoryAccountStorage()
+        let service = LocalAccountService(storage: storage)
+        let owner = try service.registerFirstAdmin(username: "owner", password: "secure-password-123")
+        let store = POSStore(database: temporaryDatabase(), accounts: service)
+        XCTAssertTrue(store.isAdministrator)
+
+        storage.failNextReads = 1
+        store.validateActiveSession() // Simulate foreground Keychain protection transition.
+        XCTAssertTrue(store.accountGate.isChecking)
+        XCTAssertFalse(store.isSignedIn) // No access until credentials are verified.
+        XCTAssertEqual(try service.restoreSession()?.id, owner.id) // Session intact.
+        XCTAssertNil(store.errorMessage) // Do not show permanent storage error.
+
+        store.retryAccountAccess() // Simulate protectedDataDidBecomeAvailable.
+        XCTAssertTrue(store.isAdministrator)
+        XCTAssertEqual(store.signedInUser?.id, owner.id)
+        XCTAssertFalse(store.accountGate.isUnavailable)
+    }
+
+    func testColdStartKeychainLockRetriesWithoutCreatingNewAdmin() throws {
+        let storage = MemoryAccountStorage()
+        let service = LocalAccountService(storage: storage)
+        let owner = try service.registerFirstAdmin(username: "owner", password: "secure-password-123")
+        storage.failNextReads = 1
+        let restarted = POSStore(database: temporaryDatabase(), accounts: service)
+        XCTAssertTrue(restarted.accountGate.isChecking)
+        XCTAssertFalse(restarted.accountGate.isSetup)
+        restarted.retryAccountAccess()
+        XCTAssertEqual(restarted.signedInUser?.id, owner.id)
+        XCTAssertFalse(try service.needsSetup())
+    }
+
+    func testPrinterTransferUsesConsecutiveLargerChunks() {
+        XCTAssertEqual(PrinterTransferPolicy.chunkBytes, 2048)
+        XCTAssertEqual(PrinterTransferPolicy.ranges(totalBytes: 0).count, 0)
+        let ranges = PrinterTransferPolicy.ranges(totalBytes: 10_000)
+        XCTAssertEqual(ranges.first, 0..<2048)
+        XCTAssertEqual(ranges.last, 8192..<10_000)
+        XCTAssertEqual(ranges.count, 5)
+        for index in 1..<ranges.count {
+            XCTAssertEqual(ranges[index - 1].upperBound, ranges[index].lowerBound)
+        }
+        XCTAssertGreaterThan(PrinterTransferPolicy.idleTimeout, 5)
     }
 
     func testManualLogoutAndPasswordChangeInvalidateSavedSession() throws {
@@ -675,7 +752,7 @@ final class ouposTests: XCTestCase {
         XCTAssertEqual(layout.items[0].name, "原味蛋餅")
         XCTAssertEqual(layout.items[0].subtotal, 35)
         XCTAssertEqual(layout.items[1].subtotal, 45)
-        XCTAssertEqual(layout.items[1].modifiers, ["加蛋 ×1 +15"])
+        XCTAssertEqual(layout.items[1].modifiers, ["加蛋 ×1"])
         XCTAssertEqual(layout.items[1].note, "不要切")
         XCTAssertEqual(layout.placedAt.count, 16) // yyyy/MM/dd HH:mm
 

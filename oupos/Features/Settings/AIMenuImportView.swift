@@ -58,6 +58,7 @@ struct AIMenuImportView: View {
                         Text("請讓 AI 只輸出 JSON。把內容存成 .json 檔案，或直接貼在下方；不支援把 OUPOS 完整備份當成 AI 菜單匯入。")
                             .font(.callout).foregroundStyle(POSColor.textSecondary)
                         Button {
+                            KeyboardDismissal.dismiss()
                             clearPreview()
                             importingFile = true
                         } label: {
@@ -65,6 +66,8 @@ struct AIMenuImportView: View {
                         }.buttonStyle(OUPOSAuthOutlineButtonStyle(compact: true))
                         Text("或貼上 JSON 文字").font(.subheadline).fontWeight(.semibold)
                         TextEditor(text: $jsonText)
+                            // Focus follows a tap on this editor only; no
+                            // FocusState is restored after sheet transitions.
                             .font(.system(size: 13, design: .monospaced))
                             .frame(height: 175)
                             .padding(8)
@@ -72,6 +75,7 @@ struct AIMenuImportView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 11))
                             .onChange(of: jsonText) { _, _ in clearPreview() }
                         Button("檢查貼上的 JSON") {
+                            KeyboardDismissal.dismiss()
                             inspect(Data(jsonText.utf8))
                         }.buttonStyle(OUPOSAuthPrimaryButtonStyle(compact: true))
                             .disabled(jsonText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -97,11 +101,13 @@ struct AIMenuImportView: View {
                 .frame(maxWidth: 820)
                 .frame(maxWidth: .infinity)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .onDisappear { KeyboardDismissal.dismiss() }
             .background(POSColor.background)
             .navigationTitle("AI 新增菜單")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("完成") { dismiss() }
+                    Button("完成") { KeyboardDismissal.dismiss(); dismiss() }
                 }
             }
             .fileImporter(isPresented: $importingFile, allowedContentTypes: [.json]) { result in

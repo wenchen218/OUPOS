@@ -16,6 +16,7 @@
 		A1AA00000000000000000001 /* AIMenuImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA00000000000000000003 /* AIMenuImport.swift */; };
 		A1AA00000000000000000002 /* AIMenuImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA00000000000000000004 /* AIMenuImportView.swift */; };
 		A6494EC62FAE1018AF20C087 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F585AAC528BCCC48FF708E0 /* OrderView.swift */; };
+		AAA800000000000000000001 /* LocalNetworkPermissionPrimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA800000000000000000002 /* LocalNetworkPermissionPrimer.swift */; };
 		ABCDEF000000000000000001 /* LocalPOSDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000003 /* LocalPOSDatabase.swift */; };
 		ABCDEF000000000000000002 /* ReceiptFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000004 /* ReceiptFormatter.swift */; };
 		ABCDEF000000000000000005 /* LocalBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF000000000000000006 /* LocalBackupView.swift */; };
@@ -53,6 +54,7 @@
 		9361E88328CDCAB51C0E5A65 /* ouposTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ouposTests.swift; sourceTree = "<group>"; };
 		A1AA00000000000000000003 /* AIMenuImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMenuImport.swift; sourceTree = "<group>"; };
 		A1AA00000000000000000004 /* AIMenuImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMenuImportView.swift; sourceTree = "<group>"; };
+		AAA800000000000000000002 /* LocalNetworkPermissionPrimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkPermissionPrimer.swift; sourceTree = "<group>"; };
 		ABCDEF000000000000000003 /* LocalPOSDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPOSDatabase.swift; sourceTree = "<group>"; };
 		ABCDEF000000000000000004 /* ReceiptFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFormatter.swift; sourceTree = "<group>"; };
 		ABCDEF000000000000000006 /* LocalBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBackupView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				DDDD00000000000000000003 /* LocalAccountService.swift */,
 				AFFE00000000000000000002 /* LocalMerchantStore.swift */,
 				54BBF27FAEC0FD8BB135460A /* NetworkPrinterService.swift */,
+				AAA800000000000000000002 /* LocalNetworkPermissionPrimer.swift */,
 				ABCDEF000000000000000003 /* LocalPOSDatabase.swift */,
 				A1AA00000000000000000003 /* AIMenuImport.swift */,
 				ABCDEF000000000000000004 /* ReceiptFormatter.swift */,
@@ -337,6 +340,7 @@
 				8707AD722B5193CCFD1E9B27 /* CommonViews.swift in Sources */,
 				B568FAD93B7341499D038015 /* DesignSystem.swift in Sources */,
 				493020FA6B1F3CC987246756 /* NetworkPrinterService.swift in Sources */,
+				AAA800000000000000000001 /* LocalNetworkPermissionPrimer.swift in Sources */,
 				ABCDEF000000000000000001 /* LocalPOSDatabase.swift in Sources */,
 				ABCDEF000000000000000002 /* ReceiptFormatter.swift in Sources */,
 				A6494EC62FAE1018AF20C087 /* OrderView.swift in Sources */,
@@ -391,6 +395,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = oupos/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = oupos;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "OUPOS 只會在忘記管理員密碼時使用 Face ID 驗證身分，驗證後可設定新密碼。";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "oupos 需要連線到店內出單機列印訂單。";
@@ -404,7 +409,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.oupos;
 				PRODUCT_NAME = oupos;
 				SDKROOT = iphoneos;
@@ -423,6 +428,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = oupos/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = oupos;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "OUPOS 只會在忘記管理員密碼時使用 Face ID 驗證身分，驗證後可設定新密碼。";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "oupos 需要連線到店內出單機列印訂單。";
@@ -436,7 +442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.oupos;
 				PRODUCT_NAME = oupos;
 				SDKROOT = iphoneos;

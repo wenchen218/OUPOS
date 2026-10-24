@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct CheckoutView: View {
     @EnvironmentObject private var store: POSStore
@@ -12,6 +13,7 @@ struct CheckoutView: View {
                 VStack(alignment: .leading, spacing: 22) {
                     HStack {
                         Button {
+                            KeyboardDismissal.dismiss()
                             store.isCheckoutPresented = false
                         } label: {
                             Label("返回點餐", systemImage: "chevron.left")
@@ -33,6 +35,7 @@ struct CheckoutView: View {
                                 PaymentMethodCard(method: method, selected: store.paymentMethod == method) {
                                     store.paymentMethod = method
                                     if method.isCash {
+                                        KeyboardDismissal.dismiss()
                                         cashDraft = store.cashReceived.map(String.init) ?? String(store.cartTotal)
                                         cashShouldReplace = true
                                         showCashKeypad = true
@@ -56,6 +59,8 @@ struct CheckoutView: View {
                         Text("訂單備註")
                             .font(.system(size: 22, weight: .bold))
                         TextEditor(text: $store.orderNote)
+                            // Do not programmatically bind editor focus. The
+                            // keyboard appears only when the note is tapped.
                             .font(.system(size: 16))
                             .scrollContentBackground(.hidden)
                             .padding(10)
@@ -72,6 +77,7 @@ struct CheckoutView: View {
                     .frame(maxWidth: .infinity)
             }
         }
+        .onDisappear { KeyboardDismissal.dismiss() }
         .overlay {
             if showCashKeypad {
                 Color.black.opacity(0.16)

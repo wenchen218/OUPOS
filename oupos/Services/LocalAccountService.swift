@@ -1,5 +1,6 @@
 import Foundation
 import Security
+import UIKit
 import CommonCrypto
 import CryptoKit
 
@@ -44,7 +45,7 @@ struct StaffAccountVault: Codable {
 enum AccountError: LocalizedError {
     case invalidUsername, invalidPassword, confirmationMismatch, duplicateUsername
     case setupComplete, setupRequired, invalidCredentials, blocked, notFound
-    case lastAdministrator, persistence(OSStatus), corrupted, notAuthorized
+    case lastAdministrator, persistence(OSStatus), protectedDataUnavailable, corrupted, notAuthorized
 
     var errorDescription: String? {
         switch self {
@@ -59,8 +60,20 @@ enum AccountError: LocalizedError {
         case .notFound: "找不到員工帳號"
         case .lastAdministrator: "無法刪除最後一位管理員"
         case .persistence(let status): "iPad Keychain 存取失敗（代碼 \(status)），已禁止建立或登入帳號"
+        case .protectedDataUnavailable: "iPad 帳號資料暫時受到系統保護，請解鎖後重試"
         case .corrupted: "本機帳號資料損壞，為保護資料已鎖定登入"
         case .notAuthorized: "需要管理員權限"
+        }
+    }
+
+    /// Device lock and the short foreground-unlock transition can temporarily
+    /// block Keychain reads. These are NOT a missing/corrupt account vault.
+    var isTemporaryKeychainFailure: Bool {
+        switch self {
+        case .protectedDataUnavailable: return true
+        case .persistence(let status):
+            return status == errSecInteractionNotAllowed || status == errSecNotAvailable
+        default: return false
         }
     }
 }
@@ -82,7 +95,14 @@ struct KeychainStaffAccountStorage: StaffAccountStorage {
          kSecAttrAccount as String: account]
     }
 
+    private func requireUnlockedDevice() throws {
+        guard UIApplication.shared.isProtectedDataAvailable else {
+            throw AccountError.protectedDataUnavailable
+        }
+    }
+
     func load() throws -> StaffAccountVault {
+        try requireUnlockedDevice()
         var attributes = query
         attributes[kSecReturnData as String] = true
         attributes[kSecMatchLimit as String] = kSecMatchLimitOne
@@ -98,6 +118,7 @@ struct KeychainStaffAccountStorage: StaffAccountStorage {
     }
 
     func save(_ vault: StaffAccountVault) throws {
+        try requireUnlockedDevice()
         let data = try JSONEncoder().encode(vault)
         var newItem = query
         newItem[kSecValueData as String] = data

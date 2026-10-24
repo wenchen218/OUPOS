@@ -18,7 +18,7 @@ struct SettingsView: View {
         VStack(spacing: 0) {
             HStack(spacing: 20) {
                 ForEach(SettingsTab.allCases) { tab in
-                    Button(tab.rawValue) { selected = tab }
+                    Button(tab.rawValue) { KeyboardDismissal.dismiss(); selected = tab }
                         .font(.system(size: 16, weight: selected == tab ? .bold : .medium))
                         .foregroundStyle(selected == tab ? POSColor.primaryStrong : POSColor.textPrimary)
                         .buttonStyle(.plain)
@@ -66,6 +66,8 @@ private struct SettingsPage<Content: View>: View {
             .padding(24)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .scrollDismissesKeyboard(.immediately)
+        .onDisappear { KeyboardDismissal.dismiss() }
     }
 }
 
@@ -111,13 +113,14 @@ private struct CatalogLocalView: View {
         SettingsPage(title: "菜單管理") {
             HStack {
                 Spacer()
-                Button { showingAIImport = true } label: {
+                Button { KeyboardDismissal.dismiss(); showingAIImport = true } label: {
                     Label("AI 新增菜單", systemImage: "sparkles")
                 }.buttonStyle(OUPOSAuthPrimaryButtonStyle(compact: true))
             }
             Picker("管理項目", selection: $section) {
                 ForEach(CatalogSection.allCases) { Text($0.rawValue).tag($0) }
             }.pickerStyle(.segmented)
+            .onChange(of: section) { _, _ in KeyboardDismissal.dismiss() }
             Group {
                 switch section {
                 case .categories: LocalCategoriesView()
@@ -422,6 +425,7 @@ private struct PaymentsLocalView: View {
 private struct PrinterLocalView: View {
     @EnvironmentObject private var store: POSStore
     @AppStorage(ReceiptFormatter.mirrorSettingKey) private var correctHorizontalMirror = true
+    @AppStorage(ReceiptFormatter.reverseRowSettingKey) private var correctVerticalOrder = true
     @State private var host = ""
     @State private var port = ""
     @State private var width = 576
@@ -438,6 +442,9 @@ private struct PrinterLocalView: View {
                     Text("58mm（384 點）").tag(384)
                     Text("80mm（576 點）").tag(576)
                 }.pickerStyle(.segmented).frame(maxWidth: 430)
+                Toggle("修正收據上下列印順序（店名先、Logo 後）", isOn: $correctVerticalOrder)
+                Text("預設開啟。若印表機先印 OUPOS Logo，請保持開啟；若店名與 Logo 顛倒則關閉。")
+                    .font(.footnote).foregroundStyle(POSColor.textSecondary)
                 Toggle("修正收據左右鏡像", isOn: $correctHorizontalMirror)
                 Text("已預設開啟。若實際印出來文字方向正常，請關閉；如果整張收據左右顛倒，請開啟。")
                     .font(.footnote).foregroundStyle(POSColor.textSecondary)

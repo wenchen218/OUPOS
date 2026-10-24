@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import LocalAuthentication
+import UIKit
 
 
 /// A password reset is permitted ONLY after the iPad confirms Face ID / Touch ID.
@@ -85,6 +86,8 @@ struct SystemAdministratorBiometricAuthenticator: AdministratorBiometricAuthenti
 
 
 enum AccountGate {
+    /// Keychain is temporarily inaccessible while iPad unlocks; not corruption.
+    case checking
     case setup
     case login
     case authenticated(StaffProfile)
@@ -104,6 +107,11 @@ enum AccountGate {
 
     var isUnavailable: Bool {
         if case .unavailable = self { return true }
+        return false
+    }
+
+    var isChecking: Bool {
+        if case .checking = self { return true }
         return false
     }
 }
@@ -178,6 +186,8 @@ final class POSStore: ObservableObject {
     private let printer: ReceiptPrinting
     private var local: LocalPOSData
     private var storageAvailable = true
+    private var priorSessionIDDuringUnlock: UUID?
+    private var keychainRetryTask: Task<Void, Never>?
 
     init(database: LocalPOSDatabase = LocalPOSDatabase(), printer: ReceiptPrinting = NetworkReceiptPrinter(),
          accounts: LocalAccountService? = nil,
@@ -197,8 +207,12 @@ final class POSStore: ObservableObject {
                 accountGate = .login
             }
         } catch {
-            accountGate = .unavailable
-            errorMessage = error.localizedDescription
+            if Self.isTemporaryAccountReadFailure(error) {
+                accountGate = .checking  // Retry when foreground/protected data is available.
+            } else {
+                accountGate = .unavailable
+                errorMessage = error.localizedDescription
+            }
         }
         do { local = try database.load() }
         catch {
@@ -372,9 +386,75 @@ final class POSStore: ObservableObject {
         revokeAdministratorRecovery()
     }
 
+    private static func isTemporaryAccountReadFailure(_ error: Error) -> Bool {
+        (error as? AccountError)?.isTemporaryKeychainFailure == true
+    }
+
+    /// Do not overwrite valid login state with a permanent error during the
+    /// protected-data unlock window. Keep the POS inaccessible until rechecked.
+    private func waitForKeychain() {
+        if case let .authenticated(profile) = accountGate {
+            priorSessionIDDuringUnlock = profile.id
+        }
+        accountGate = .checking
+        guard keychainRetryTask == nil, UIApplication.shared.isProtectedDataAvailable else { return }
+        keychainRetryTask = Task { [weak self] in
+            // Short transient Keychain errors sometimes outlast scenePhase .active.
+            // On an actually locked iPad, wait for the unlock notification instead.
+            for delay: UInt64 in [300_000_000, 600_000_000, 1_000_000_000,
+                                  1_500_000_000, 2_500_000_000] {
+                do { try await Task.sleep(nanoseconds: delay) }
+                catch { break }
+                guard let self, self.accountGate.isChecking,
+                      UIApplication.shared.isProtectedDataAvailable else { break }
+                self.retryAccountAccess()
+            }
+            self?.keychainRetryTask = nil
+        }
+    }
+
+    /// Retry without creating accounts or erasing anything when Keychain is locked.
+    /// Triggered on foreground, iPad unlock, and manually from the waiting screen.
+    func retryAccountAccess() {
+        guard accountGate.isChecking else { return }
+        do {
+            if try accounts.needsSetup() {
+                priorSessionIDDuringUnlock = nil
+                accountGate = .setup
+                return
+            }
+            if let profile = try accounts.restoreSession() {
+                if let previousID = priorSessionIDDuringUnlock, profile.id != previousID {
+                    lockAccountUI()
+                    return
+                }
+                let profiles = profile.role == .administrator ? try accounts.profiles() : []
+                priorSessionIDDuringUnlock = nil
+                staffAccounts = profiles
+                accountGate = .authenticated(profile)
+                if isAdministrator && storageAvailable { refreshReportSync() }
+            } else {
+                lockAccountUI()
+            }
+        } catch {
+            if Self.isTemporaryAccountReadFailure(error) {
+                waitForKeychain()
+            } else {
+                priorSessionIDDuringUnlock = nil
+                lockAccountUI()
+                accountGate = .unavailable
+                errorMessage = "無法驗證登入狀態：\(error.localizedDescription)"
+            }
+        }
+    }
+
     /// Called on foreground and periodically while the app remains open.
-    /// Expired, deleted, or password-changed accounts must lose access.
+    /// Only an ACTUAL expired, deleted or password-changed login ends the session.
     func validateActiveSession() {
+        if accountGate.isChecking {
+            retryAccountAccess()
+            return
+        }
         guard let profile = signedInUser else { return }
         do {
             guard let current = try accounts.restoreSession(), current.id == profile.id else {
@@ -382,9 +462,13 @@ final class POSStore: ObservableObject {
                 return
             }
         } catch {
-            lockAccountUI()
-            accountGate = .unavailable
-            errorMessage = "無法驗證登入狀態：\(error.localizedDescription)"
+            if Self.isTemporaryAccountReadFailure(error) {
+                waitForKeychain()
+            } else {
+                lockAccountUI()
+                accountGate = .unavailable
+                errorMessage = "無法驗證登入狀態：\(error.localizedDescription)"
+            }
         }
     }
 
@@ -428,6 +512,7 @@ final class POSStore: ObservableObject {
     }
 
     private func lockAccountUI() {
+        priorSessionIDDuringUnlock = nil
         revokeAdministratorRecovery()
         clearCart()
         accountGate = .login
@@ -633,9 +718,11 @@ final class POSStore: ObservableObject {
         do {
             let businessName = UserDefaults.standard.string(forKey: LocalMerchantStore.businessNameKey)
             let mirror = UserDefaults.standard.object(forKey: ReceiptFormatter.mirrorSettingKey) as? Bool ?? true
+            let reverseRows = UserDefaults.standard.object(forKey: ReceiptFormatter.reverseRowSettingKey) as? Bool ?? true
             let receipt = ReceiptFormatter.makeReceipt(order: order, width: printerTarget.width,
                                                        businessName: businessName,
-                                                       correctHorizontalMirror: mirror)
+                                                       correctHorizontalMirror: mirror,
+                                                       correctVerticalOrder: reverseRows)
             try await printer.print(data: receipt, to: printerTarget)
             if showSuccess { showToast("已傳送至出單機") }
         } catch {

@@ -15,9 +15,6 @@ struct AccountGateView: View {
     @State private var confirmation = ""
     @State private var introPhase: LoginIntroPhase = .loading
     @State private var showingAdministratorRecovery = false
-    @FocusState private var focusedField: LoginField?
-
-    private enum LoginField: Hashable { case username, password, confirmation }
     private var registering: Bool { store.accountGate.isSetup }
     private var splashColor: Color { Color(red: 137 / 255, green: 166 / 255, blue: 194 / 255) }
 
@@ -48,7 +45,7 @@ struct AccountGateView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.bottom, 36)
                     }
-                    .scrollDismissesKeyboard(.interactively)
+                    .scrollDismissesKeyboard(.immediately)
                     .transition(.opacity.combined(with: .offset(y: 18)))
                 }
 
@@ -73,6 +70,7 @@ struct AccountGateView: View {
             AdministratorRecoveryView()
                 .environmentObject(store)
         }
+        .onDisappear { KeyboardDismissal.dismiss() }
         .task {
             // The logo must stay on screen while loading, not blink into a
             // separate sign-in page. Cancelling this task stops the animation
@@ -104,7 +102,17 @@ struct AccountGateView: View {
                 }
             }
 
-            if store.accountGate.isUnavailable {
+            if store.accountGate.isChecking {
+                VStack(spacing: 14) {
+                    ProgressView().controlSize(.large)
+                    Text("正在等待 iPad 解鎖並確認帳號資料…")
+                        .foregroundStyle(POSColor.textSecondary)
+                    Button("重新讀取帳號") { store.retryAccountAccess() }
+                        .buttonStyle(OUPOSAuthOutlineButtonStyle())
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+            } else if store.accountGate.isUnavailable {
                 Text("帳號儲存空間無法讀取，已停止登入以保護原有資料。請勿刪除 App。")
                     .foregroundStyle(POSColor.danger)
             } else {
@@ -115,19 +123,17 @@ struct AccountGateView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .ouposAuthInput()
-                        .focused($focusedField, equals: .username)
                         .submitLabel(.next)
-                        .onSubmit { focusedField = .password }
+                        .onSubmit { KeyboardDismissal.dismiss() }
                 }
                 VStack(alignment: .leading, spacing: 7) {
                     Text("密碼").font(.subheadline.weight(.semibold))
                     SecureField("請輸入密碼", text: $password)
                         .textContentType(registering ? .newPassword : .password)
                         .ouposAuthInput()
-                        .focused($focusedField, equals: .password)
                         .submitLabel(registering ? .next : .go)
                         .onSubmit {
-                            if registering { focusedField = .confirmation }
+                            if registering { KeyboardDismissal.dismiss() }
                             else { submitCredentials() }
                         }
                 }
@@ -137,8 +143,7 @@ struct AccountGateView: View {
                         SecureField("再次輸入密碼", text: $confirmation)
                             .textContentType(.newPassword)
                             .ouposAuthInput()
-                            .focused($focusedField, equals: .confirmation)
-                            .submitLabel(.go)
+                                .submitLabel(.go)
                             .onSubmit { submitCredentials() }
                     }
                     Text("帳號需有 3～32 個英數字、_ 或 -；密碼至少 8 個字元。")
@@ -174,7 +179,7 @@ struct AccountGateView: View {
     }
 
     private func submitCredentials() {
-        focusedField = nil
+        KeyboardDismissal.dismiss()
         if registering {
             store.registerAdministrator(username: username, password: password, confirmation: confirmation)
         } else {
@@ -253,6 +258,7 @@ struct StaffAccountsView: View {
             .padding(24)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .onDisappear { KeyboardDismissal.dismiss() }
         .alert("確認刪除員工帳號？", isPresented: Binding(get: { deletionTarget != nil }, set: { if !$0 { deletionTarget = nil } })) {
             Button("刪除", role: .destructive) {
                 if let id = deletionTarget?.id { store.deleteEmployee(id: id) }

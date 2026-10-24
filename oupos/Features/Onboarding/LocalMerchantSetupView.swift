@@ -60,6 +60,7 @@ struct LocalMerchantSetupView: View {
                 .frame(maxWidth: .infinity)
             }
         }
+        .onDisappear { KeyboardDismissal.dismiss() }
         .task {
             do {
                 try await Task.sleep(for: .milliseconds(800))
@@ -71,6 +72,7 @@ struct LocalMerchantSetupView: View {
     }
 
     private func submit() {
+        KeyboardDismissal.dismiss()
         _ = merchant.saveBusinessName(businessName)
     }
 }

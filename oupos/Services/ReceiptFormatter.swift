@@ -42,7 +42,8 @@ enum ReceiptFormatter {
             note: order.note.trimmingCharacters(in: .whitespacesAndNewlines),
             items: order.lines.map { line in
                 ReceiptContent.Item(name: line.name, quantity: line.quantity,
-                                    subtotal: line.subtotal, modifiers: line.modifiers,
+                                    subtotal: line.subtotal,
+                                    modifiers: line.modifiers.map { printableModifierName($0) },
                                     note: line.note)
             },
             quantity: order.totalQuantity,
@@ -50,12 +51,25 @@ enum ReceiptFormatter {
         )
     }
 
+    /// Strip only the legacy trailing topping surcharge (e.g. "加蛋 ×5 +75").
+    /// Product subtotals already include topping costs and must never be modified.
+    static func printableModifierName(_ value: String) -> String {
+        guard let priceRange = value.range(of: #" \+\d+$"#, options: .regularExpression) else {
+            return value
+        }
+        return String(value[..<priceRange.lowerBound])
+    }
+
     // Some ESC/POS firmware mirrors raster rows. This setting corrects the user's
     // current printer; turn it off in 出單機設定 for printers with standard raster orientation.
     static let mirrorSettingKey = "oupos.receipt.correctHorizontalMirror"
+    /// This printer feeds the bottom of a raster block first. Correct its vertical
+    /// ordering at output time so the business name prints before the OUPOS logo.
+    static let reverseRowSettingKey = "oupos.receipt.correctVerticalOrder"
 
     static func makeReceipt(order: POSOrder, width: Int, businessName: String? = nil,
-                            correctHorizontalMirror: Bool = true) -> Data {
+                            correctHorizontalMirror: Bool = true,
+                            correctVerticalOrder: Bool = true) -> Data {
         let pixelsWide = width == 384 ? 384 : 576
         let receipt = content(order: order, businessName: businessName)
 
@@ -105,6 +119,10 @@ enum ReceiptFormatter {
                                        UInt8(rowBytes & 0xFF), UInt8((rowBytes >> 8) & 0xFF),
                                        UInt8(blockHeight & 0xFF), UInt8((blockHeight >> 8) & 0xFF)])
             for y in startY..<(startY + blockHeight) {
+                // Reverse the physical raster *rows*, not text or drawing geometry.
+                // The printer observed in use prints the last row first, so sending
+                // the footer first restores the intended shop-name-first output.
+                let imageY = correctVerticalOrder ? (pixelsHigh - 1 - y) : y
                 for xb in 0..<rowBytes {
                     var bits: UInt8 = 0
                     for bit in 0..<8 {
@@ -112,7 +130,7 @@ enum ReceiptFormatter {
                         // Keep glyphs, columns, and the footer logo together when correcting
                         // a printer's mirrored output; swapping just the columns breaks text.
                         let imageX = correctHorizontalMirror ? (pixelsWide - 1 - paperX) : paperX
-                        if gray[y * pixelsWide + imageX] < 165 {
+                        if gray[imageY * pixelsWide + imageX] < 165 {
                             bits |= 1 << (7 - bit)
                         }
                     }
@@ -201,9 +219,13 @@ enum ReceiptFormatter {
             y += units(before)
             if let context {
                 context.setFillColor(UIColor.black.cgColor)
-                context.fill(CGRect(x: margin, y: y, width: bodyWidth, height: units(2)))
+                // Use equal margins on both sides. A slightly shorter rule also
+                // prevents clipping on printers with narrower printable regions.
+                let lineWidth = min(bodyWidth, width * 0.82)
+                context.fill(CGRect(x: (width - lineWidth) / 2, y: y,
+                                    width: lineWidth, height: units(3)))
             }
-            y += units(2 + after)
+            y += units(3 + after)
         }
         mutating func branding() {
             y += units(64)
@@ -238,12 +260,12 @@ enum ReceiptFormatter {
             separator(before: 23, after: 26)
             for item in receipt.items {
                 pair("\(item.name)x\(item.quantity)", "\(item.subtotal)",
-                     font: type(45), after: 3, minimumRightShare: 0.19)
+                     font: type(54, bold: true), after: 5, minimumRightShare: 0.19)
                 for modifier in item.modifiers {
-                    single("**" + modifier, font: type(34), after: 3)
+                    single("**" + modifier, font: type(45, bold: true), after: 5)
                 }
                 if let note = item.note?.trimmingCharacters(in: .whitespacesAndNewlines), !note.isEmpty {
-                    single("**備註：" + note, font: type(34), after: 3)
+                    single("**備註：" + note, font: type(43), after: 5)
                 }
                 y += units(14)
             }

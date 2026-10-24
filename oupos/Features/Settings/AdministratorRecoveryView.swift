@@ -46,11 +46,13 @@ struct AdministratorRecoveryView: View {
                 .frame(maxWidth: .infinity)
             }
             .background(POSColor.background)
+            .onDisappear { KeyboardDismissal.dismiss() }
             .navigationTitle("管理員密碼救援")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("關閉") {
+                        KeyboardDismissal.dismiss()
                         store.revokeAdministratorRecovery()
                         newPassword = ""
                         confirmation = ""
